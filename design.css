@@ -1,0 +1,306 @@
+body{
+	margin:0px;
+	padding:0px;
+	background-color:#000;
+}
+
+.maindiv{
+	width:1000px;
+	margin:0px auto;
+}
+
+.header{
+	background:url(images/headerbg.jpg) no-repeat;
+	
+	height:176px;
+	padding-top:10px;
+}
+
+.logo{
+   	float:left;
+   	width:210px;
+	margin-left:30px;
+	margin-right:30px;
+	
+}
+
+.sitename{
+
+	float:left;
+	font-family: Arial, Helvetica, sans-serif;
+	color:#00618a;
+	font-size:20px;
+	font-weight:bold;
+	width:400px;
+	text-align:center;
+	text-transform:uppercase;
+	margin-top:50px;
+	margin-right:20px;
+
+}
+.clear{
+	clear:both;
+}
+.headercontact{
+	background:url(images/topcontactbg.png) no-repeat;
+	width:296px;
+	height:132px;
+	float: left;
+}
+
+.websitename{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:24px;
+	margin-top:10px;
+	margin-left:20px;
+	color:#000;
+}
+
+.mailid{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:20px;
+	margin-top:10px;
+	margin-left:20px;
+	font-weight:bold;
+	color:#000;
+    
+}
+
+.phoneno{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:24px;
+	margin-top:10px;
+	margin-left:20px;
+	color:#FFF;
+}
+
+.menubardiv{
+   background:url(images/menubg.jpg) repeat-x;
+   height:40px;
+   margin-bottom:10px;
+   padding-top:6px;
+   padding-left:50px;
+}
+
+.menuitem{
+   background:url(images/menubackground.png) no-repeat;
+   width:127px;
+   height:44px;
+   float:left;
+   margin-right:20px;
+   padding-top:12px;
+   text-align:center;
+   font-family:Arial;
+}
+
+.menuitem a{
+	text-decoration:none;
+	color:#000;
+	font-weight:bold;
+}
+
+.menuitem:hover{
+	background:url(images/menuactive.png) no-repeat;
+
+}
+.menuitemactive{
+    background:url(images/menuactive.png) no-repeat;
+	width:127px;
+	height:44px;
+	float:left;
+	margin-right:20px;
+	padding-top:12px;
+	text-align:center;
+	font-family:Arial;
+}
+
+.menuitemactive a{
+    text-decoration:none;
+	color:#000;
+	font-weight:bold;	
+}
+
+.maincontent{
+    width:970px;
+	margin:0px auto;
+
+}
+
+.leftdiv{
+    width:213px;
+    float:left;
+}
+
+.leftmenuitem{
+    background:url(images/leftmenubg.png) no-repeat;
+    font-family:Arial;
+    width:200px;
+    height:32px;
+    margin-bottom:1px;
+    text-align:center;
+    padding-top:8px;
+}
+
+.leftmenuitem a{
+	text-decoration:none;
+	color:#000;
+	font-weight:bold;
+}
+
+.rightdiv{
+    float:left;
+    width:730px;
+    background-color: #FFF;
+    padding-left:15px;
+    font-family:Arial;
+}
+
+.mainwebsitecontent{
+     width:700;
+     font-family:Arial;    
+}
+
+
+.galleryimgdiv{
+	float:left;
+	margin:10px 20px 10px 20px;
+}
+
+.galleryimgdimension{
+	width:200px;
+	height:150px;
+}
+
+.footer_left{
+    background:url(images/footer_left.png) no-repeat;
+	height:33px;
+	width:13px;
+	float:left;
+	margin-left:15px;
+	margin-top:10px;
+	padding-top:15px;
+}
+
+.footer_middle{
+    background:url(images/footer_middle.png) repeat-x;
+	height:33px;
+	width:943px;
+	float:left;
+	padding-top:15px;
+	margin-top:10px;
+}
+
+.footer_right{
+    background:url(images/footer_right.png) no-repeat;
+	height:33px;
+	width:14px;
+	float:left;
+	padding-top:15px;
+    margin-top:10px;
+}
+
+.footerinner{
+    width:507px;
+	margin:0px auto;
+}
+
+.footermenu{
+    font-size:12px;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#000;
+	font-weight:bold;
+	float:left;
+	margin-right:10px;
+	border-right:1px solid #000;
+	padding-right:10px;
+}
+
+.footermenu a{
+    text-decoration:none;
+	color:#000;   
+	font-weight:bold;
+}
+
+.mainimage{
+	background:url(images/banner.gif) no-repeat;
+	width:743px;
+	height:239px;
+}
+
+.maincontent1{
+    margin:20px auto;
+    width:970px;
+}
+
+.whydiv{
+    width:213px;
+    background:url(images/whybg.jpg) repeat-x;
+    height:174px;
+    border:#FFF 1px solid;
+    border-radius:5px;
+    margin-right:13px;
+    float:left;
+    padding-top:15px;
+    text-align:center;
+    font-family:Arial;
+}
+
+.whyheading{
+    color:#FFF;
+}
+
+.whycontent{
+    color:#FFF;
+}
+
+.coursesmaindiv{
+    background:#FDC059;
+    border:#FFF 1px solid;
+    width:326px;
+    height:174px;
+    margin-right:14px;
+    padding-top:15px;
+    font-family:Arial;
+    float:left;
+}
+
+.coursesheading{
+	color:#FFF;
+	font-weight:bold;
+}  
+
+.coursescontent{
+    font-size:13px;
+    font-weight:bold;
+}
+
+.services{
+    background:url(images/services.jpg) no-repeat;
+    width:380px;
+    height:195px;
+    float:left;
+}
+
+.formrow{
+    margin-bottom:30px;
+    font-family:Arial;
+    padding-left:20px;
+}
+
+.formlabel{
+    font-weight:bold;
+    font-size:15px;
+    width:100px;
+    float:left;
+}
+
+.inputform{
+    font-size:15px;
+    width:300px;
+    float:left;
+
+}
+
+.space{
+	height:30px;
+}
