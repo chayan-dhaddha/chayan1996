@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cdvirtualserver;
+package cdvirtualclient;
 
 import java.net.*;
+import java.io.*;
 import java.util.Vector;
-
 /**
  *
  * @author Chayan-Dhaddha
  */
-public class CommResource {
-     public static Admin admin; 
-     public static Vector<ClientInfo> loggedInClient;
+public class CommResource { 
+    public static Socket client;    
 }

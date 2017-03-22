@@ -3,90 +3,125 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cdvirtualserver;
+package cdvirtualclient;
+import Resource.RequestCodes;
 import java.awt.*;
-import java.awt.event.*;
-import java.io.ObjectOutputStream;
 import javax.swing.*;
+import java.awt.event.*;
+import java.io.*;
 /**
  *
  * @author Chayan-Dhaddha
  */
 public class LoginWindow extends JFrame implements ActionListener{
-      JLabel lbl_id,lbl_pwd;
-      JTextField txt_id;
-      JPasswordField txt_pwd;
-      JButton btn_login;
-      Dimension size;
-      public Boolean flag;
-      String admin_id="abc@gmail.com";
-      String admin_pwd="abc12345";
-      
-    public LoginWindow(){
-        Toolkit tool=Toolkit.getDefaultToolkit();
-        size=tool.getScreenSize();
-        final int WIDTH=400; 
-        final int HEIGHT=200;
-        this.setVisible(true);
-        this.setBounds(size.width/2-WIDTH/2,size.height/2-HEIGHT/2,WIDTH,HEIGHT);
-        this.setTitle("Login Window");
-        this.setResizable(false);
+    JLabel lbl_id,lbl_pwd,lbl_head;
+   // CheckBoxGroup cbg;
+    JCheckBox box_mentor,box_student;
+    JButton btn_login,btn_register;
+    //JRadioButton box_admin,box_mentor,box_student;
+    JTextField txt_id;
+    JPasswordField txt_pwd;
+    ButtonGroup grp;
+    String response,role; 
+    
+    public LoginWindow(){   
         this.setLayout(null);
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         flag=false;
-         lbl_id=new JLabel("Login_id:");
-         lbl_pwd=new JLabel("Password:");
-         txt_id=new JTextField();
-         txt_pwd=new JPasswordField();
-         btn_login=new JButton("Login");
-         this.design();
-         btn_login.addActionListener(this);
-    }
-    
-    void design(){
-        setPosition(lbl_id,40,40,100,25);
-        setPosition(txt_id,140,40,150,25);
-        setPosition(lbl_pwd,40,80,100,25);
-        setPosition(txt_pwd,140,80,150,25);
-        setPosition(btn_login,90,130,100,20);
-    } 
-    
-    void setPosition(Component c,int x,int y,int w,int h){
-        this.add(c);
-        c.setBounds(x,y,w,h);
-    }
-    
-    public void actionPerformed(ActionEvent ae){
-        String id=txt_id.getText();
-        String pwd=new String(txt_pwd.getPassword());
-        System.out.println("login id: "+id+" pwd: "+pwd);
-        if(id.equals("") || pwd.equals("")){
-            JOptionPane.showMessageDialog(this,"Fill all entries","Empty TextField",JOptionPane.ERROR_MESSAGE);
-        }
-        else{
-            if(id.equals(admin_id) && pwd.equals(admin_pwd) ){
-                  this.dispose();
-                  CommResource.admin.tab.addTab("Mentor Registration",CommResource.admin.panel_mentor_reg);
-                  CommResource.admin.tab.addTab("Upcoming Session",CommResource.admin.panel_upcoming_session);
-                  CommResource.admin.tab.addTab("Past Session",CommResource.admin.panel_past_session);
-                  CommResource.admin.btn_login.setVisible(false);
-                  CommResource.admin.addWindowListener(new WindowAdapter(){
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        Toolkit tool=Toolkit.getDefaultToolkit();
+        Dimension size=tool.getScreenSize();
+        final int WIDTH=400;
+        final int HEIGHT=300;
+        this.setVisible(true);
+        this.setBounds(size.width/2-WIDTH/2,size.height/2-HEIGHT/2,WIDTH,HEIGHT);
+        this.setTitle("LOGIN_WINDOW");
+        this.setResizable(false);
+        btn_register=new JButton("Student's Registration");
+        lbl_head=new JLabel("LOGIN AS->");
+       
+        this.box_mentor=new JCheckBox("Mentor");
+        this.box_student=new JCheckBox("Student");
+        this.grp=new ButtonGroup();
+        this.grp.add(box_mentor);
+        this.grp.add(box_student);
+        this.box_mentor.setActionCommand("mentor");
+        this.box_student.setActionCommand("student");
+        lbl_id=new JLabel("LOGIN_ID :");
+        lbl_pwd=new JLabel("PASSWORD :");
+        txt_id=new JTextField(40);
+        txt_pwd=new JPasswordField();
+        btn_login=new JButton("Login");
+        this.btn_register.addActionListener(this);
+        this.btn_login.addActionListener(this);
+        this.design();
+        this.addWindowListener(new WindowAdapter(){
                                     public void windowClosing(WindowEvent e) {
                                       
-                                        if(JOptionPane.showConfirmDialog(CommResource.admin,"Do you want to logout??","Confirmation",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
-                                           
-            CommResource.admin.dispose();
-                                            
+                                        if(JOptionPane.showConfirmDialog(LoginWindow.this,"Do you want to exit??","Confirmation",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+                                              System.exit(0);
                                         }
-                                        
                                     }
                                });
-    
-            }
-            else{
-                 JOptionPane.showMessageDialog(this,"Invalid login_id/password","Login Error",JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        
     }
+    
+    void design(){   
+        setPosition(btn_register,200,20,180,20);
+        setPosition(lbl_head,40,60,100,20);
+        setPosition(box_mentor,120,80,80,20);
+        setPosition(box_student,200,80,80,20);
+        
+        setPosition(lbl_id,40,135,100,25);
+        setPosition(txt_id,140,135,200,25);
+        setPosition(lbl_pwd,40,175,100,25);
+        setPosition(txt_pwd,140,175,200,25);
+        setPosition(btn_login,190,220,100,20);
+    }
+    
+    void setPosition(Component C,int x,int y,int w,int h){
+        this.add(C);
+        C.setBounds(x,y,w,h);
+    }
+    
+    public void actionPerformed(ActionEvent ae) {
+       //validation check
+       if(ae.getSource()==btn_register){
+           Register log=new Register();
+           this.dispose();
+       }
+       else if(ae.getSource()==btn_login){
+           try{
+               ObjectOutputStream out=new ObjectOutputStream(CommResource.client.getOutputStream());
+               out.writeObject(RequestCodes.LOGIN_DETAIL);
+               role=this.grp.getSelection().getActionCommand();
+               out.writeObject(this.role);
+               out.writeObject(this.txt_id.getText());
+               out.writeObject(new String(this.txt_pwd.getPassword()));
+               
+               ObjectInputStream in=new ObjectInputStream(CommResource.client.getInputStream());
+               response=in.readObject().toString();
+               if(response.equals("Success")){
+                      if(role.equals("mentor")){
+                          Mentor log=new Mentor();
+                          new MentorThread(log);
+                          ObjectOutputStream os=new ObjectOutputStream(CommResource.client.getOutputStream());
+                          os.writeObject(RequestCodes.INIT_UPCOMING_SESSION_MENTOR);
+                          this.dispose();
+                      }
+                      else{
+                          Student log=new Student();
+                          new StudentThread(log);
+                          ObjectOutputStream os=new ObjectOutputStream(CommResource.client.getOutputStream());
+                          os.writeObject(RequestCodes.INIT_UPCOMING_SESSION_STUDENT);
+                          this.dispose();
+                      }
+               }else{
+                   JOptionPane.showMessageDialog(this, "Invalid LoginId/Password","Login",JOptionPane.ERROR_MESSAGE);
+               }
+           }catch(Exception ex){
+               
+           }
+       }
+       
+   }      
+
 }
